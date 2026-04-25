@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.guser.controller.UserController">
+    <center>
+        <VBox spacing="22.0" styleClass="content-shell">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="96.0" spacing="12.0" styleClass="hero-bar">
+                    <padding>
+                        <Insets bottom="22.0" left="30.0" right="30.0" top="22.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="brand-lockup">
+                            <children>
+                                <StackPane styleClass="brand-logo-shell,brand-logo-shell-light">
+                                    <children>
+                                        <ImageView fitHeight="42.0" fitWidth="42.0" preserveRatio="true" smooth="true">
+                                            <image>
+                                                <Image url="@assets/logo-otemps.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </StackPane>
+                                <VBox spacing="2.0">
+                                    <children>
+                                        <Label styleClass="brand-title,brand-title-light" text="&#212;Temps" />
+                                        <Label styleClass="brand-subtitle,brand-subtitle-light" text="Espace Administration" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <VBox spacing="6.0">
+                            <children>
+                                <Label styleClass="eyebrow" text="Administration des comptes" />
+                                <Label styleClass="page-title" text="Utilisateurs" />
+                                <Label fx:id="totalUsersLabel" styleClass="hero-subtitle" text="0 utilisateurs" />
+                            </children>
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#deconnexion" styleClass="btn-secondary" text="Deconnexion" />
+                        <TextField fx:id="rechercheField" promptText="Rechercher par nom..." styleClass="search-field" />
+                        <Button fx:id="triNomButton" mnemonicParsing="false" onAction="#trierParNom" styleClass="btn-primary" text="Tri Z-A" />
+                    </children>
+                </HBox>
+                <HBox spacing="22.0">
+                    <padding>
+                        <Insets left="28.0" right="28.0" />
+                    </padding>
+                    <children>
+                        <VBox prefWidth="370.0" spacing="14.0" styleClass="form-panel">
+                            <children>
+                                <Label styleClass="panel-title" text="Ajouter ou modifier" />
+                                <Label styleClass="panel-subtitle" text="" wrapText="true" />
+                                <TextField fx:id="nomField" promptText="Nom" styleClass="search-field" />
+                                <TextField fx:id="prenomsField" promptText="Prenoms" styleClass="search-field" />
+                                <TextField fx:id="emailField" promptText="Email" styleClass="search-field" />
+                                <TextField fx:id="telephoneField" promptText="Telephone" styleClass="search-field" />
+                                <PasswordField fx:id="motDePasseField" promptText="Mot de passe" styleClass="search-field" />
+                                <ComboBox fx:id="roleBox" promptText="Role" styleClass="search-field" />
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#ajouterUtilisateur" styleClass="btn-primary" text="Ajouter" />
+                                        <Button mnemonicParsing="false" onAction="#modifierUtilisateur" styleClass="btn-secondary" text="Modifier" />
+                                        <Button mnemonicParsing="false" onAction="#supprimerUtilisateur" styleClass="btn-danger" text="Supprimer" />
+                                    </children>
+                                </HBox>
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#enregistrerFaceId" styleClass="btn-faceid" text="Enroler FaceID" />
+                                        <Button mnemonicParsing="false" onAction="#supprimerFaceId" styleClass="btn-secondary" text="Retirer FaceID" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <VBox spacing="14.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <VBox spacing="10.0" styleClass="list-panel">
+                                    <children>
+                                        <Label styleClass="panel-title" text="Liste des utilisateurs" />
+                                        <Label styleClass="panel-subtitle" text="" wrapText="true" />
+                                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="cards-scroll" VBox.vgrow="ALWAYS">
+                                            <content>
+                                                <FlowPane fx:id="userCardsContainer" hgap="16.0" prefWrapLength="820.0" vgap="16.0">
+                                                    <padding>
+                                                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                                    </padding>
+                                                </FlowPane>
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
+
