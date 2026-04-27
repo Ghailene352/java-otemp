@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane minHeight="700.0" minWidth="600.0" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="otemps.controllers.ChatbotController"
+            style="-fx-background-color: #f5f3f0;">
+
+    <style>
+        .root {
+        -fx-font-family: "Georgia", serif;
+        }
+
+        .header {
+        -fx-background: linear-gradient(to right, #1a1a1a 0%, #2d2d2d 100%);
+        -fx-padding: 20;
+        -fx-spacing: 10;
+        }
+
+        .header-title {
+        -fx-font-size: 20;
+        -fx-font-weight: bold;
+        -fx-text-fill: #d4af37;
+        }
+
+        .input-area {
+        -fx-background-color: #f5f3f0;
+        -fx-padding: 15;
+        -fx-spacing: 10;
+        }
+
+        .send-button {
+        -fx-background-color: #d4af37;
+        -fx-text-fill: white;
+        -fx-padding: 10 25;
+        -fx-font-weight: bold;
+        -fx-cursor: hand;
+        -fx-font-family: "Georgia", serif;
+        }
+
+        .send-button:hover {
+        -fx-background-color: #c19a1a;
+        }
+
+        .upload-button {
+        -fx-background-color: #9370db;
+        -fx-text-fill: white;
+        -fx-padding: 10 20;
+        -fx-font-weight: bold;
+        -fx-cursor: hand;
+        }
+
+        .upload-button:hover {
+        -fx-background-color: #7b5bb0;
+        }
+    </style>
+
+    <!-- En-tête -->
+    <top>
+        <VBox styleClass="header">
+            <Label text="🤖 Chatbot OTEMPS - Assistant Musée" styleClass="header-title" />
+            <Label text="Uploadez une image pour identifier l'objet" style="-fx-text-fill: #b8860b; -fx-font-size: 11;" />
+        </VBox>
+    </top>
+
+    <!-- Zone de chat -->
+    <center>
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" style="-fx-background-color: white;">
+            <VBox fx:id="chatContainer" spacing="10" style="-fx-background-color: white; -fx-padding: 20;" />
+        </ScrollPane>
+    </center>
+
+    <!-- Zone de saisie -->
+    <bottom>
+        <VBox styleClass="input-area">
+            <HBox spacing="10">
+                <Button fx:id="uploadButton" text="📤 Upload Image" styleClass="upload-button" />
+                <TextField fx:id="messageInput"
+                           promptText="Décrivez l'objet ou posez une question..."
+                           HBox.hgrow="ALWAYS"
+                           style="-fx-padding: 10; -fx-font-size: 12; -fx-border-radius: 5;" />
+                <Button fx:id="sendButton" text="Envoyer" styleClass="send-button" />
+            </HBox>
+            <Label text="💡 Exemples: 'Femme à la licorne', 'Statuette égyptienne', 'Masque égyptien'"
+                   style="-fx-font-size: 10; -fx-text-fill: #888; -fx-wrap-text: true;" />
+        </VBox>
+    </bottom>
+
+</BorderPane>

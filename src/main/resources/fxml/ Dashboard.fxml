@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="900.0" minWidth="1400.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="otemps.controllers.AdminDashboardController">
+
+    <style>
+        .root {
+        -fx-font-family: "Georgia", "Garamond", serif;
+        -fx-background-color: #f5f3f0;
+        }
+
+        /* ==================== EN-TÊTE ==================== */
+        .header {
+        -fx-background: linear-gradient(to right, #1a1a1a 0%, #2d2d2d 100%);
+        -fx-padding: 25;
+        -fx-spacing: 15;
+        }
+
+        .header-title {
+        -fx-font-size: 32;
+        -fx-font-weight: bold;
+        -fx-text-fill: #d4af37;
+        -fx-font-family: "Georgia", serif;
+        -fx-letter-spacing: 2;
+        }
+
+        .header-subtitle {
+        -fx-font-size: 11;
+        -fx-text-fill: #b8860b;
+        -fx-font-style: italic;
+        -fx-letter-spacing: 1;
+        }
+
+        /* ==================== CARTES STATISTIQUES ==================== */
+        .stat-card {
+        -fx-background-color: white;
+        -fx-border-color: #e8dcc8;
+        -fx-border-width: 2;
+        -fx-border-radius: 10;
+        -fx-padding: 25;
+        -fx-spacing: 12;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 0, 3);
+        }
+
+        .stat-card:hover {
+        -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.2), 15, 0.5, 0, 5);
+        -fx-border-color: #d4af37;
+        }
+
+        .stat-icon {
+        -fx-font-size: 28;
+        -fx-text-fill: #d4af37;
+        }
+
+        .stat-label {
+        -fx-font-size: 11;
+        -fx-text-fill: #666;
+        -fx-font-weight: bold;
+        -fx-letter-spacing: 1;
+        }
+
+        .stat-number {
+        -fx-font-size: 48;
+        -fx-font-weight: bold;
+        -fx-text-fill: #1a1a1a;
+        -fx-font-family: "Segoe UI", sans-serif;
+        }
+
+        /* ==================== BOUTONS ==================== */
+        .btn-primary {
+        -fx-background-color: #d4af37;
+        -fx-text-fill: white;
+        -fx-padding: 12 28;
+        -fx-font-size: 12;
+        -fx-font-weight: bold;
+        -fx-cursor: hand;
+        -fx-border-radius: 6;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.5, 0, 2);
+        -fx-font-family: "Georgia", serif;
+        -fx-letter-spacing: 1;
+        }
+
+        .btn-primary:hover {
+        -fx-background-color: #c19a1a;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.5, 0, 4);
+        }
+
+        .btn-primary:pressed {
+        -fx-background-color: #a8741a;
+        }
+
+        .btn-secondary {
+        -fx-background-color: #4a4a4a;
+        -fx-text-fill: white;
+        -fx-padding: 10 20;
+        -fx-font-size: 11;
+        -fx-cursor: hand;
+        -fx-border-radius: 5;
+        -fx-font-family: "Georgia", serif;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0.5, 0, 1);
+        }
+
+        .btn-secondary:hover {
+        -fx-background-color: #5a5a5a;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.5, 0, 2);
+        }
+
+        .btn-danger {
+        -fx-background-color: #8b4513;
+        -fx-text-fill: white;
+        -fx-padding: 10 20;
+        -fx-font-size: 11;
+        -fx-cursor: hand;
+        -fx-border-radius: 5;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0.5, 0, 1);
+        }
+
+        .btn-danger:hover {
+        -fx-background-color: #a0522d;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.5, 0, 2);
+        }
+
+        /* ==================== SECTIONS ==================== */
+        .menu-section {
+        -fx-background-color: white;
+        -fx-border-color: #e8dcc8;
+        -fx-border-width: 1;
+        -fx-border-radius: 8;
+        -fx-padding: 20;
+        -fx-spacing: 15;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 0, 3);
+        }
+
+        .section-title {
+        -fx-font-size: 16;
+        -fx-font-weight: bold;
+        -fx-text-fill: #1a1a1a;
+        -fx-font-family: "Georgia", serif;
+        -fx-padding: 0 0 10 0;
+        -fx-border-color: #d4af37;
+        -fx-border-width: 0 0 2 0;
+        }
+
+        /* ==================== ACTION CARDS ==================== */
+        .action-card {
+        -fx-background-color: white;
+        -fx-border-color: #e8dcc8;
+        -fx-border-width: 1;
+        -fx-border-radius: 8;
+        -fx-padding: 15;
+        -fx-spacing: 10;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0.5, 0, 2);
+        }
+
+        .action-card:hover {
+        -fx-border-color: #d4af37;
+        -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.15), 12, 0.5, 0, 3);
+        }
+
+        .action-title {
+        -fx-font-size: 13;
+        -fx-font-weight: bold;
+        -fx-text-fill: #1a1a1a;
+        -fx-font-family: "Georgia", serif;
+        }
+
+        .action-desc {
+        -fx-font-size: 10;
+        -fx-text-fill: #888;
+        -fx-wrap-text: true;
+        }
+
+        /* ==================== INFO BOX ==================== */
+        .info-box {
+        -fx-background-color: #faf8f5;
+        -fx-border-color: #e8dcc8;
+        -fx-border-width: 1;
+        -fx-border-radius: 8;
+        -fx-padding: 15;
+        }
+
+        .info-label {
+        -fx-font-size: 11;
+        -fx-font-weight: bold;
+        -fx-text-fill: #666;
+        -fx-letter-spacing: 1;
+        }
+
+        .info-value {
+        -fx-font-size: 12;
+        -fx-text-fill: #1a1a1a;
+        -fx-font-weight: bold;
+        -fx-font-family: "Georgia", serif;
+        }
+
+        /* ==================== PIED DE PAGE ==================== */
+        .footer {
+        -fx-background-color: #1a1a1a;
+        -fx-border-top: 2 solid #d4af37;
+        -fx-padding: 12;
+        -fx-alignment: center;
+        -fx-text-fill: #b8860b;
+        -fx-font-size: 10;
+        }
+
+        /* ==================== SEPARATEUR ==================== */
+        .separator {
+        -fx-border-color: #e8dcc8;
+        }
+    </style>
+
+    <!-- ==================== EN-TÊTE ==================== -->
+    <top>
+        <VBox styleClass="header">
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="🏛️ OTEMPS - Musée du Patrimoine" styleClass="header-title" />
+                    <Label text="Administration des Collections Culturelles" styleClass="header-subtitle" />
+                </VBox>
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="🏠 Accueil" onAction="#handleHome" styleClass="btn-secondary" />
+                    <Button text="🚪 Déconnexion" onAction="#handleLogout" styleClass="btn-danger" />
+                </HBox>
+            </HBox>
+            <Separator styleClass="separator" />
+        </VBox>
+    </top>
+
+    <!-- ==================== CONTENU PRINCIPAL ==================== -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #f5f3f0; -fx-padding: 0;">
+            <VBox spacing="25" style="-fx-padding: 30; -fx-background-color: #f5f3f0;">
+
+                <!-- ==================== STATISTIQUES ==================== -->
+                <VBox spacing="20">
+                    <Label text="📊 Vue d'ensemble des Collections" styleClass="section-title" />
+
+                    <GridPane hgap="20" vgap="20">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="33.33" />
+                            <ColumnConstraints percentWidth="33.33" />
+                            <ColumnConstraints percentWidth="33.34" />
+                        </columnConstraints>
+
+                        <!-- Catégories -->
+                        <VBox styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="ALWAYS">
+                            <HBox spacing="10">
+                                <Label text="📂" styleClass="stat-icon" />
+                                <Label text="CATÉGORIES" styleClass="stat-label" VBox.vgrow="ALWAYS" />
+                            </HBox>
+                            <Label fx:id="lblCategoriesCount" text="0" styleClass="stat-number" />
+                            <Separator styleClass="separator" />
+                            <Button text="Gérer les catégories" onAction="#handleCategories" styleClass="btn-primary" maxWidth="Infinity" />
+                        </VBox>
+
+                        <!-- Objets -->
+                        <VBox styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="ALWAYS">
+                            <HBox spacing="10">
+                                <Label text="🎨" styleClass="stat-icon" />
+                                <Label text="OBJETS PATRIMONIAUX" styleClass="stat-label" VBox.vgrow="ALWAYS" />
+                            </HBox>
+                            <Label fx:id="lblObjetsCount" text="0" styleClass="stat-number" />
+                            <Separator styleClass="separator" />
+                            <Button text="Gérer les objets" onAction="#handleObjets" styleClass="btn-primary" maxWidth="Infinity" />
+                        </VBox>
+
+                        <!-- Médias -->
+                        <VBox styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.hgrow="ALWAYS">
+                            <HBox spacing="10">
+                                <Label text="🖼️" styleClass="stat-icon" />
+                                <Label text="MÉDIAS" styleClass="stat-label" VBox.vgrow="ALWAYS" />
+                            </HBox>
+                            <Label fx:id="lblMediasCount" text="0" styleClass="stat-number" />
+                            <Separator styleClass="separator" />
+                            <Button text="Gérer les médias" onAction="#handleMedias" styleClass="btn-primary" maxWidth="Infinity" />
+                        </VBox>
+                    </GridPane>
+                </VBox>
+
+                <!-- ==================== ACTIONS RAPIDES ==================== -->
+                <VBox spacing="15" styleClass="menu-section">
+                    <Label text="⚡ Ajouter Rapidement" styleClass="section-title" />
+
+                    <HBox spacing="15">
+                        <VBox styleClass="action-card" HBox.hgrow="ALWAYS">
+                            <Label text="➕ Nouvelle Catégorie" styleClass="action-title" />
+                            <Label text="Créer une catégorie pour classer les œuvres" styleClass="action-desc" wrapText="true" />
+                            <Button text="Ajouter" onAction="#handleAddCategorie" styleClass="btn-primary" maxWidth="Infinity" />
+                        </VBox>
+
+                        <VBox styleClass="action-card" HBox.hgrow="ALWAYS">
+                            <Label text="➕ Nouvel Objet" styleClass="action-title" />
+                            <Label text="Ajouter une œuvre à la collection du musée" styleClass="action-desc" wrapText="true" />
+                            <Button text="Ajouter" onAction="#handleAddObjet" styleClass="btn-primary" maxWidth="Infinity" />
+                        </VBox>
+
+                        <VBox styleClass="action-card" HBox.hgrow="ALWAYS">
+                            <Label text="➕ Nouvelle Image" styleClass="action-title" />
+                            <Label text="Uploader des photos ou des vidéos d'œuvres" styleClass="action-desc" wrapText="true" />
+                            <Button text="Ajouter" onAction="#handleAddMedia" styleClass="btn-primary" maxWidth="Infinity" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- ==================== GESTION COMPLÈTE ==================== -->
+                <VBox spacing="15" styleClass="menu-section">
+                    <Label text="⚙️ Gestion Complète" styleClass="section-title" />
+
+                    <GridPane hgap="12" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="25" />
+                            <ColumnConstraints percentWidth="25" />
+                            <ColumnConstraints percentWidth="25" />
+                            <ColumnConstraints percentWidth="25" />
+                        </columnConstraints>
+
+                        <Button text="📚 Catégories" onAction="#handleCategories"
+                                style="-fx-font-size: 11; -fx-padding: 12 20; -fx-background-color: #e8dcc8; -fx-text-fill: #1a1a1a; -fx-font-weight: bold; -fx-border-radius: 5;"
+                                GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="Infinity" />
+
+                        <Button text="🎨 Objets" onAction="#handleObjets"
+                                style="-fx-font-size: 11; -fx-padding: 12 20; -fx-background-color: #e8dcc8; -fx-text-fill: #1a1a1a; -fx-font-weight: bold; -fx-border-radius: 5;"
+                                GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="Infinity" />
+
+                        <Button text="🖼️ Médias" onAction="#handleMedias"
+                                style="-fx-font-size: 11; -fx-padding: 12 20; -fx-background-color: #e8dcc8; -fx-text-fill: #1a1a1a; -fx-font-weight: bold; -fx-border-radius: 5;"
+                                GridPane.columnIndex="2" GridPane.rowIndex="0" maxWidth="Infinity" />
+
+                        <Button text="📊 Rapports" onAction="#handleReports"
+                                style="-fx-font-size: 11; -fx-padding: 12 20; -fx-background-color: #e8dcc8; -fx-text-fill: #1a1a1a; -fx-font-weight: bold; -fx-border-radius: 5;"
+                                GridPane.columnIndex="3" GridPane.rowIndex="0" maxWidth="Infinity" />
+                    </GridPane>
+                </VBox>
+
+                <!-- ==================== INFORMATIONS SYSTÈME ==================== -->
+                <VBox spacing="15" styleClass="menu-section">
+                    <Label text="ℹ️ Informations du Système" styleClass="section-title" />
+
+                    <HBox spacing="30" styleClass="info-box">
+                        <VBox spacing="8">
+                            <Label text="🔗 BASE DE DONNÉES" styleClass="info-label" />
+                            <Label fx:id="lblDbStatus" text="✅ Connectée" styleClass="info-value" />
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="🕐 DERNIÈRE MISE À JOUR" styleClass="info-label" />
+                            <Label fx:id="lblLastUpdate" text="--:--" styleClass="info-value" />
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="📦 VERSION" styleClass="info-label" />
+                            <Label text="1.0.0" styleClass="info-value" />
+                        </VBox>
+
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <Button text="🔄 Rafraîchir" onAction="#handleRefresh" styleClass="btn-primary" />
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- ==================== PIED DE PAGE ==================== -->
+    <bottom>
+        <HBox styleClass="footer" spacing="20" alignment="CENTER_LEFT">
+            <Label text="© 2024 OTEMPS - Musée du Patrimoine Culturel" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="lblStatus" text="✅ Système opérationnel" style="-fx-font-weight: bold;" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

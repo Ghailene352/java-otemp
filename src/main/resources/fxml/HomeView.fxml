@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="mainBorderPane" minHeight="900.0" minWidth="1600.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="otemps.controllers.HomeController"
+            style="-fx-background-color: #1a1a1a;">
+
+    <!-- HEADER -->
+    <top>
+        <VBox style="-fx-background-color: #0d0d0d; -fx-border-color: #d4af37; -fx-border-width: 0 0 3 0;">
+            <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 20;">
+                <Label text="🏛" style="-fx-font-size: 40;" />
+                <VBox spacing="5">
+                    <Label text="OTEMPS MUSEUM" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #d4af37;" />
+                    <Label text="Explorez notre collection d'objets patrimoniaux historiques" style="-fx-font-size: 12; -fx-text-fill: #999;" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <HBox spacing="15" alignment="CENTER">
+                    <Button text="🏠 Accueil" onAction="#handleGalerie" style="-fx-background-color: transparent; -fx-text-fill: #d4af37; -fx-font-weight: bold; -fx-font-size: 11; -fx-cursor: hand; -fx-underline: true;" />
+                    <Separator orientation="VERTICAL" style="-fx-text-fill: #666;" />
+                    <Button fx:id="toggleFavoritesButton" text="❤️ FAVORIS (0)" onAction="#handleToggleFavorites" style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
+                    <Button fx:id="toggleChatButton" text="🤖 Assistant IA" onAction="#handleToggleChat" style="-fx-background-color: #9370db; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
+                    <Button text="🔧 Admin" onAction="#handleAdmin" style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
+                </HBox>
+            </HBox>
+            <VBox spacing="15" style="-fx-padding: 0 20 20 20;">
+                <HBox spacing="15" alignment="CENTER">
+                    <Label text="🔍 Rechercher:" style="-fx-text-fill: #d4af37; -fx-font-weight: bold; -fx-font-size: 12;" />
+                    <TextField fx:id="searchField" promptText="Rechercher par nom, époque, origine..." HBox.hgrow="ALWAYS" style="-fx-padding: 12; -fx-background-radius: 5; -fx-font-size: 11; -fx-background-color: #2c2c2c; -fx-text-fill: white;"/>
+                    <Button text="🔄 Réinitialiser" onAction="#handleReset" style="-fx-background-color: #c5a059; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-cursor: hand; -fx-background-radius: 5;" />
+                </HBox>
+                <HBox spacing="30" style="-fx-padding: 10; -fx-background-color: #1a1a1a; -fx-border-radius: 5;">
+                    <Label fx:id="statsLabel" text="📊 Objets en collection: Chargement..." style="-fx-text-fill: #d4af37; -fx-font-size: 11; -fx-font-weight: bold;" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </top>
+
+    <!-- CENTER - GALERIE + FAVORIS -->
+    <center>
+        <VBox style="-fx-background-color: #1a1a1a; -fx-padding: 0;">
+
+            <!-- SECTION FAVORIS -->
+            <VBox fx:id="favoritesSection" visible="false" managed="false"
+                  style="-fx-background-color: #0a0a0a; -fx-padding: 25;"
+                  VBox.vgrow="ALWAYS"
+                  prefHeight="500">
+                <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 0 0 15 0; -fx-border-color: #ff6b6b; -fx-border-width: 0 0 3 0;">
+                    <Label text="❤️ MES FAVORIS"
+                           style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #ff6b6b;" />
+                    <Label fx:id="favoritesCountLabel" text="(0 objets)"
+                           style="-fx-font-size: 14; -fx-text-fill: #999;" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button text="✕ Fermer" onAction="#handleCloseFavorites"
+                            style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
+                </HBox>
+
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                            style="-fx-background-color: #0a0a0a; -fx-control-inner-background: #0a0a0a; -fx-padding: 15 0 0 0;">
+                    <FlowPane fx:id="favorisContainer" hgap="20" vgap="20"
+                              style="-fx-padding: 20; -fx-background-color: #0a0a0a;"
+                              prefWrapLength="1500"/>
+                </ScrollPane>
+            </VBox>
+
+            <!-- TITRE COLLECTION -->
+            <HBox style="-fx-padding: 20 30; -fx-border-color: #d4af37; -fx-border-width: 0 0 2 0; -fx-background-color: #0d0d0d;">
+                <Label text="✨ Collection du Musée" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #d4af37;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="collectionCount" text="0 objets" style="-fx-font-size: 12; -fx-text-fill: #999;" />
+            </HBox>
+
+            <!-- GALERIE PRINCIPALE -->
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                        style="-fx-background-color: #1a1a1a; -fx-control-inner-background: #1a1a1a; -fx-padding: 0;">
+                <FlowPane fx:id="galerieContainer" hgap="20" vgap="20"
+                          style="-fx-padding: 30; -fx-background-color: #1a1a1a;"
+                          prefWrapLength="1500"/>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <!-- CHAT SIDEBAR AVEC UPLOAD AMÉLIORÉ -->
+    <right>
+        <VBox fx:id="chatSidebar" visible="false" managed="false"
+              style="-fx-border-color: #d4af37; -fx-border-width: 0 0 0 3; -fx-background-color: #0d0d0d;"
+              minWidth="480" maxWidth="480">
+
+            <!-- HEADER CHAT -->
+            <HBox spacing="10" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #9370db; -fx-border-color: #d4af37; -fx-border-width: 0 0 2 0;">
+                <Label text="🤖 Assistant Historique OTEMPS" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="✕" onAction="#handleCloseChatbot" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14; -fx-cursor: hand; -fx-padding: 0 5;" />
+            </HBox>
+
+            <!-- INFO CHATBOT -->
+            <VBox style="-fx-padding: 15; -fx-background-color: #1a1a1a; -fx-border-color: #333; -fx-border-width: 0 0 1 0;">
+                <Label text="📸 GUIDE D'ANALYSE D'IMAGE:" style="-fx-text-fill: #d4af37; -fx-font-size: 11; -fx-font-weight: bold;" />
+                <Label text="1. Uploadez une photo d'objet patrimonial" style="-fx-text-fill: #999; -fx-font-size: 9; -fx-wrap-text: true;" />
+                <Label text="2. L'IA détectera automatiquement:" style="-fx-text-fill: #999; -fx-font-size: 9; -fx-wrap-text: true;" />
+                <Label text="   ✓ Titre  ✓ Époque  ✓ Origine" style="-fx-text-fill: #d4af37; -fx-font-size: 9;" />
+                <Label text="   ✓ Matériaux  ✓ Description" style="-fx-text-fill: #d4af37; -fx-font-size: 9;" />
+                <Label text="   ✓ Importance historique" style="-fx-text-fill: #d4af37; -fx-font-size: 9;" />
+            </VBox>
+
+            <!-- ZONE D'AFFICHAGE IMAGE -->
+            <VBox style="-fx-padding: 10; -fx-background-color: #0a0a0a; -fx-border-color: #333; -fx-border-width: 0 0 1 0;">
+                <Label fx:id="imageInfoLabel" text="📷 Aucune image uploadée"
+                       style="-fx-text-fill: #999; -fx-font-size: 10; -fx-wrap-text: true;" />
+                <ImageView fx:id="chatImageView" fitHeight="180" fitWidth="440" preserveRatio="true"
+                           style="-fx-border-color: #d4af37; -fx-border-width: 2; -fx-border-radius: 5; -fx-padding: 5;" />
+            </VBox>
+
+            <!-- CHAT MESSAGES -->
+            <ScrollPane fx:id="chatScrollPane" fitToWidth="true" VBox.vgrow="ALWAYS"
+                        style="-fx-background-color: #0d0d0d; -fx-control-inner-background: #0d0d0d;">
+                <VBox fx:id="chatContainer" spacing="10" style="-fx-padding: 15; -fx-background-color: #0d0d0d;" />
+            </ScrollPane>
+
+            <!-- BOUTONS D'ACTION -->
+            <HBox spacing="10" style="-fx-padding: 10; -fx-background-color: #0a0a0a;">
+                <Button fx:id="uploadButton" text="📸 UPLOAD IMAGE" onAction="#handleUploadImage"
+                        style="-fx-background-color: #d4af37; -fx-text-fill: #0d0d0d; -fx-padding: 10 12; -fx-font-weight: bold; -fx-font-size: 10; -fx-cursor: hand; -fx-background-radius: 5; -fx-min-width: 140;" />
+                <Button text="🗑️ EFFACER" onAction="#handleClearChat"
+                        style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-padding: 10 12; -fx-font-weight: bold; -fx-font-size: 10; -fx-cursor: hand; -fx-background-radius: 5; -fx-min-width: 100;" />
+            </HBox>
+
+            <!-- INPUT MESSAGE -->
+            <HBox spacing="10" style="-fx-padding: 10; -fx-border-color: #333; -fx-border-width: 1 0 0 0; -fx-background-color: #0d0d0d;">
+                <TextField fx:id="messageInput" promptText="Question sur l'objet..." HBox.hgrow="ALWAYS"
+                           style="-fx-padding: 10; -fx-background-color: #2c2c2c; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-size: 10;" />
+                <Button fx:id="sendButton" text="📤" onAction="#handleSendMessage"
+                        style="-fx-background-color: #9370db; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 8; -fx-cursor: hand; -fx-background-radius: 5; -fx-min-width: 40;" />
+            </HBox>
+        </VBox>
+    </right>
+</BorderPane>
