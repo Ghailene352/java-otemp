@@ -38,6 +38,7 @@ public class LoginController {
     private static final int TWO_FACTOR_CODE_EXPIRATION_MINUTES = 5;
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d).{8,}$");
+    private static final Pattern FACE_TEMPLATE_TOKEN_PATTERN = Pattern.compile("^[A-Za-z0-9_-]{20,128}$");
 
     @FXML
     private TextField emailField;
@@ -148,12 +149,39 @@ public class LoginController {
 
             User matchedUser = null;
             double bestScore = 0.0;
+            boolean hasApiTemplate = false;
+            IOException compareFailure = null;
             for (User candidate : candidates) {
-                double score = faceIdService.compareTemplates(liveTemplate, candidate.getFaceTemplate());
+                String enrolledTemplate = candidate.getFaceTemplate();
+                if (!isApiTemplate(enrolledTemplate)) {
+                    continue;
+                }
+
+                hasApiTemplate = true;
+                double score;
+                try {
+                    score = faceIdService.compareTemplates(liveTemplate, enrolledTemplate);
+                } catch (IOException exception) {
+                    compareFailure = exception;
+                    continue;
+                }
+
                 if (score > bestScore) {
                     bestScore = score;
                     matchedUser = candidate;
                 }
+            }
+
+            if (!hasApiTemplate) {
+                showAlert(Alert.AlertType.ERROR, "Aucun template Face ID API valide trouve. Re-enrolez les comptes ADMIN.");
+                refreshCaptcha();
+                return;
+            }
+
+            if (matchedUser == null && compareFailure != null) {
+                showAlert(Alert.AlertType.ERROR, "Verification Face ID indisponible : " + compareFailure.getMessage());
+                refreshCaptcha();
+                return;
             }
 
             if (matchedUser == null || bestScore < faceIdService.getMatchThreshold()) {
@@ -354,5 +382,11 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private boolean isApiTemplate(String template) {
+        return template != null
+                && !template.isBlank()
+                && FACE_TEMPLATE_TOKEN_PATTERN.matcher(template).matches();
     }
 }

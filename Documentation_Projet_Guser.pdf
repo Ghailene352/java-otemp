@@ -1,0 +1,2386 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 20 /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R 24 0 R 26 0 R 28 0 R 30 0 R 32 0 R 34 0 R 36 0 R 38 0 R 40 0 R 42 0 R ] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 1959 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(DOCUMENTATION COMPLETE - PROJET GUSER) Tj
+T*
+(Genere automatiquement le 2026-04-26 00:20) Tj
+T*
+() Tj
+T*
+(1. OBJECTIF DU PROJET) Tj
+T*
+(Application JavaFX d'administration d'utilisateurs avec authentification admin renforcee \(CAPTCHA,) Tj
+T*
+( 2FA email, FaceID\), gestion CRUD et alertes de securite.) Tj
+T*
+() Tj
+T*
+(2. STACK TECHNIQUE) Tj
+T*
+(- Java 17 + JavaFX 17) Tj
+T*
+(- Maven \(build + execution JavaFX\)) Tj
+T*
+(- MySQL via JDBC \(mysql-connector-j\)) Tj
+T*
+(- Jakarta Mail \(emails OTP/alertes\)) Tj
+T*
+(- Webcam Capture \(capture image/FaceID\)) Tj
+T*
+() Tj
+T*
+(3. STRUCTURE DU PROJET) Tj
+T*
+(Guser/) Tj
+T*
+(  .mvn/) Tj
+T*
+(  .idea/) Tj
+T*
+(  src/) Tj
+T*
+(    main/) Tj
+T*
+(      java/) Tj
+T*
+(        com/guser/) Tj
+T*
+(          MainApp.java) Tj
+T*
+(          config/DatabaseConfig.java) Tj
+T*
+(          config/DatabaseConnection.java) Tj
+T*
+(          config/MailConfig.java) Tj
+T*
+(          controller/DashboardController.java) Tj
+T*
+(          controller/LoginController.java) Tj
+T*
+(          controller/UserController.java) Tj
+T*
+(          dao/UserDao.java) Tj
+T*
+(          model/User.java) Tj
+T*
+(          service/CaptchaApiService.java) Tj
+T*
+(          service/EmailService.java) Tj
+T*
+(          service/FaceIdService.java) Tj
+T*
+(          util/SceneManager.java) Tj
+T*
+(          util/SessionManager.java) Tj
+T*
+(      resources/) Tj
+T*
+(        database.sql) Tj
+T*
+(        com/guser/) Tj
+T*
+(          login-view.fxml) Tj
+T*
+(          user-view.fxml) Tj
+T*
+(          dashboard-view.fxml) Tj
+T*
+(          app.css) Tj
+T*
+(          assets/) Tj
+T*
+(            logo-otemps.png) Tj
+T*
+(            logo.png) Tj
+T*
+(  pom.xml) Tj
+T*
+(  target/ \(artefacts Maven compiles\)) Tj
+T*
+() Tj
+T*
+(4. INVENTAIRE GLOBAL DES CLASSES ET METHODES) Tj
+T*
+(- com.guser.config.DatabaseConfig: 4 methodes/constructeurs) Tj
+T*
+(- com.guser.config.DatabaseConnection: 2 methodes/constructeurs) Tj
+T*
+(Page 1/20) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 3086 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(- com.guser.config.MailConfig: 6 methodes/constructeurs) Tj
+T*
+(- com.guser.controller.DashboardController: 4 methodes/constructeurs) Tj
+T*
+(- com.guser.controller.LoginController: 17 methodes/constructeurs) Tj
+T*
+(- com.guser.controller.UserController: 21 methodes/constructeurs) Tj
+T*
+(- com.guser.dao.UserDao: 20 methodes/constructeurs) Tj
+T*
+(- com.guser.MainApp: 3 methodes/constructeurs) Tj
+T*
+(- com.guser.model.User: 25 methodes/constructeurs) Tj
+T*
+(- com.guser.service.CaptchaApiService: 3 methodes/constructeurs) Tj
+T*
+(- com.guser.service.EmailService: 14 methodes/constructeurs) Tj
+T*
+(- com.guser.service.FaceIdService: 9 methodes/constructeurs) Tj
+T*
+(- com.guser.util.SceneManager: 2 methodes/constructeurs) Tj
+T*
+(- com.guser.util.SessionManager: 4 methodes/constructeurs) Tj
+T*
+(TOTAL METHODES/CONSTRUCTEURS DETECTES: 134) Tj
+T*
+() Tj
+T*
+(5. DETAIL COMPLET PAR CLASSE) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.config.DatabaseConfig) Tj
+T*
+(Fichier: src/main/java/com/guser/config/DatabaseConfig.java) Tj
+T*
+(Responsabilite: Centralise les parametres de connexion MySQL \(URL, utilisateur, mot de passe\) via) Tj
+T*
+(des accesseurs statiques.) Tj
+T*
+(Dependances principales: Aucune importation explicite.) Tj
+T*
+(Nombre de methodes/constructeurs: 4) Tj
+T*
+() Tj
+T*
+(1. Signature: private DatabaseConfig\(\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public static String getUrl\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'url' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(3. Signature: public static String getUsername\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'username' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(4. Signature: public static String getPassword\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'password' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.config.DatabaseConnection) Tj
+T*
+(Fichier: src/main/java/com/guser/config/DatabaseConnection.java) Tj
+T*
+(Responsabilite: Expose une fabrique de connexion JDBC en s'appuyant sur DatabaseConfig.) Tj
+T*
+(Page 2/20) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 3001 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(Dependances principales: java.sql.Connection, java.sql.DriverManager, java.sql.SQLException) Tj
+T*
+(Nombre de methodes/constructeurs: 2) Tj
+T*
+() Tj
+T*
+(1. Signature: private DatabaseConnection\(\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public static Connection getConnection\(\) throws SQLException) Tj
+T*
+(   Role: Expose la valeur courante de 'connection' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: Connection.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.config.MailConfig) Tj
+T*
+(Fichier: src/main/java/com/guser/config/MailConfig.java) Tj
+T*
+(Responsabilite: Centralise la configuration SMTP utilisee par EmailService.) Tj
+T*
+(Dependances principales: Aucune importation explicite.) Tj
+T*
+(Nombre de methodes/constructeurs: 6) Tj
+T*
+() Tj
+T*
+(1. Signature: private MailConfig\(\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public static String getSmtpHost\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'smtp host' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(3. Signature: public static int getSmtpPort\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'smtp port' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: int.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(4. Signature: public static String getUsername\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'username' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(5. Signature: public static String getPassword\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'password' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(Page 3/20) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 3324 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(6. Signature: public static String getFromAddress\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'from address' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.controller.DashboardController) Tj
+T*
+(Fichier: src/main/java/com/guser/controller/DashboardController.java) Tj
+T*
+(Responsabilite: Controleur JavaFX du tableau de bord admin \(metriques, navigation vers les) Tj
+T*
+(utilisateurs, deconnexion\).) Tj
+T*
+(Dependances principales: com.guser.dao.UserDao, com.guser.model.User, com.guser.util.SceneManager,) Tj
+T*
+( com.guser.util.SessionManager, javafx.fxml.FXML, javafx.scene.control.Alert,) Tj
+T*
+(javafx.scene.control.Label, java.sql.SQLException) Tj
+T*
+(Nombre de methodes/constructeurs: 4) Tj
+T*
+() Tj
+T*
+(1. Signature: public void initialize\(\)) Tj
+T*
+(   Role: Alimente l'entete avec l'utilisateur de session puis recharge les metriques du dashboard.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: private void ouvrirUtilisateurs\(\)) Tj
+T*
+(   Role: Ouvre la vue de gestion des utilisateurs.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(3. Signature: private void deconnexion\(\)) Tj
+T*
+(   Role: Vide la session en memoire puis renvoie vers l'ecran de connexion.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(4. Signature: private void refreshMetrics\(\)) Tj
+T*
+(   Role: Calcule le total des utilisateurs via UserDao et met a jour les labels d'indicateurs.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL; bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.controller.LoginController) Tj
+T*
+(Fichier: src/main/java/com/guser/controller/LoginController.java) Tj
+T*
+(Responsabilite: Controleur JavaFX de l'authentification : captcha, mot de passe, 2FA email, oubli) Tj
+T*
+(de mot de passe et login FaceID.) Tj
+T*
+(Dependances principales: com.github.sarxos.webcam.Webcam, com.guser.dao.UserDao,) Tj
+T*
+(com.guser.model.User, com.guser.service.CaptchaApiService, com.guser.service.EmailService,) Tj
+T*
+(com.guser.service.FaceIdService, com.guser.util.SceneManager, com.guser.util.SessionManager) Tj
+T*
+(Nombre de methodes/constructeurs: 17) Tj
+T*
+() Tj
+T*
+(1. Signature: private void initialize\(\)) Tj
+T*
+(   Role: Implante la logique de 'initialize' selon le contexte de la classe LoginController.) Tj
+T*
+(Page 4/20) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 3219 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: private void seConnecter\(\)) Tj
+T*
+(   Role: Flux principal d'authentification admin: validations de saisie, captcha, mot de passe, role ADMIN, puis 2FA email.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL; peut echouer si SMTP est mal configure.) Tj
+T*
+() Tj
+T*
+(3. Signature: private void ouvrirMonTravail\(\)) Tj
+T*
+(   Role: Gere la logique metier de 'ouvrir mon travail' avec les operations suivantes: navigation entre vues JavaFX, feedback utilisateur.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(4. Signature: private void seConnecterParVisage\(\)) Tj
+T*
+(   Role: Authentifie un admin par comparaison FaceID entre template capture et templates en base.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(5. Signature: private void motDePasseOublie\(\)) Tj
+T*
+(   Role: Declenche la recuperation par email \(code OTP\) puis met a jour le mot de passe en base.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL; peut echouer si SMTP est mal configure.) Tj
+T*
+() Tj
+T*
+(6. Signature: private boolean askCode\(String expectedCode\)) Tj
+T*
+(   Role: Implante la logique de 'ask code' selon le contexte de la classe LoginController.) Tj
+T*
+(   Parametres: String expectedCode) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(7. Signature: private Optional<String> askNewPassword\(\)) Tj
+T*
+(   Role: Gere la logique metier de 'ask new password' avec les operations suivantes: validation de format, retour optionnel, feedback utilisateur.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: Optional<String>.) Tj
+T*
+(   Risques/contraintes: bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(8. Signature: private String generateCode\(\)) Tj
+T*
+(   Role: Gere la logique metier de 'generate code' avec les operations suivantes: generation pseudo-aleatoire.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(9. Signature: private void regenererCaptcha\(\)) Tj
+T*
+(   Role: Implante la logique de 'regenerer captcha' selon le contexte de la classe LoginController.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(Page 5/20) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
+endobj
+15 0 obj
+<< /Length 3411 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(10. Signature: private void refreshCaptcha\(\)) Tj
+T*
+(   Role: Implante la logique de 'refresh captcha' selon le contexte de la classe LoginController.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(11. Signature: private boolean validateTwoFactor\(User user\) throws MessagingException) Tj
+T*
+(   Role: Genere et envoie un code 2FA temporaire, puis delegate la verification a une boite de dialogue.) Tj
+T*
+(   Parametres: User user) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(12. Signature: private boolean askTwoFactorCode\(String expectedCode, LocalDateTime expiresAt\)) Tj
+T*
+(   Role: Gere la logique metier de 'ask two factor code' avec les operations suivantes: feedback utilisateur.) Tj
+T*
+(   Parametres: String expectedCode, LocalDateTime expiresAt) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(13. Signature: private void handleFailedPasswordAttempt\(String email\) throws SQLException) Tj
+T*
+(   Role: Compte les echecs de connexion par email et declenche une capture camera au 3e echec.) Tj
+T*
+(   Parametres: String email) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(14. Signature: private void resetFailedAttempts\(String email\)) Tj
+T*
+(   Role: Implante la logique de 'reset failed attempts' selon le contexte de la classe LoginController.) Tj
+T*
+(   Parametres: String email) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(15. Signature: private void sendCaptureToUser\(User user\)) Tj
+T*
+(   Role: Capture une image webcam et l'envoie en piece jointe d'un email d'alerte de securite.) Tj
+T*
+(   Parametres: User user) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: peut echouer si SMTP est mal configure.) Tj
+T*
+() Tj
+T*
+(16. Signature: private Path captureFromCamera\(\) throws IOException) Tj
+T*
+(   Role: Gere la logique metier de 'capture from camera' avec les operations suivantes: interaction camera.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: Path.) Tj
+T*
+(   Risques/contraintes: necessite une camera accessible.) Tj
+T*
+() Tj
+T*
+(17. Signature: private void showAlert\(Alert.AlertType type, String message\)) Tj
+T*
+(   Role: Gere la logique metier de 'show alert' avec les operations suivantes: feedback utilisateur.) Tj
+T*
+(   Parametres: Alert.AlertType type, String message) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.controller.UserController) Tj
+T*
+(Fichier: src/main/java/com/guser/controller/UserController.java) Tj
+T*
+(Responsabilite: Controleur JavaFX de gestion des utilisateurs : CRUD, recherche, tri, validation) Tj
+T*
+(Page 6/20) Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 17 0 R >>
+endobj
+17 0 obj
+<< /Length 3213 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(des champs et enrollement FaceID.) Tj
+T*
+(Dependances principales: com.guser.dao.UserDao, com.guser.model.User,) Tj
+T*
+(com.guser.service.EmailService, com.guser.service.FaceIdService, com.guser.util.SceneManager,) Tj
+T*
+(com.guser.util.SessionManager, jakarta.mail.MessagingException, javafx.application.Platform) Tj
+T*
+(Nombre de methodes/constructeurs: 21) Tj
+T*
+() Tj
+T*
+(1. Signature: public void initialize\(\)) Tj
+T*
+(   Role: Controle l'acces ADMIN, initialise la liste des roles et les listeners UI, puis charge les utilisateurs.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: private void ajouterUtilisateur\(\)) Tj
+T*
+(   Role: Valide les champs, envoie un code de verification email, puis insere l'utilisateur si le code est confirme.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL; peut echouer si SMTP est mal configure.) Tj
+T*
+() Tj
+T*
+(3. Signature: private void modifierUtilisateur\(\)) Tj
+T*
+(   Role: Met a jour l'utilisateur selectionne apres validation metier et persiste les changements en base.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(4. Signature: private void supprimerUtilisateur\(\)) Tj
+T*
+(   Role: Supprime l'utilisateur selectionne apres confirmation explicite.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL; bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(5. Signature: private void trierParNom\(\)) Tj
+T*
+(   Role: Implante la logique de 'trier par nom' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(6. Signature: private void deconnexion\(\)) Tj
+T*
+(   Role: Gere la logique metier de 'deconnexion' avec les operations suivantes: navigation entre vues JavaFX.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(7. Signature: private void enregistrerFaceId\(\)) Tj
+T*
+(   Role: Capture un template FaceID et le lie a l'utilisateur ADMIN selectionne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(8. Signature: private void supprimerFaceId\(\)) Tj
+T*
+(   Role: Implante la logique de 'supprimer face id' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(Page 7/20) Tj
+ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 19 0 R >>
+endobj
+19 0 obj
+<< /Length 3050 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(9. Signature: private void refreshUsers\(\)) Tj
+T*
+(   Role: Implante la logique de 'refresh users' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(10. Signature: private void renderUserCards\(\)) Tj
+T*
+(   Role: Reconstruit la grille des cartes selon recherche et ordre de tri.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(11. Signature: private VBox createUserCard\(User user\)) Tj
+T*
+(   Role: Implante la logique de 'create user card' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: User user) Tj
+T*
+(   Retour: Retourne: VBox.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(12. Signature: private Region spacer\(\)) Tj
+T*
+(   Role: Implante la logique de 'spacer' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: Region.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(13. Signature: private Label createMetaLabel\(String text\)) Tj
+T*
+(   Role: Implante la logique de 'create meta label' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: String text) Tj
+T*
+(   Retour: Retourne: Label.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(14. Signature: private String formatCreationDate\(User user\)) Tj
+T*
+(   Role: Implante la logique de 'format creation date' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: User user) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(15. Signature: private void selectUser\(User user\)) Tj
+T*
+(   Role: Implante la logique de 'select user' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: User user) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(16. Signature: private boolean validateFields\(User editingUser\)) Tj
+T*
+(   Role: Applique les regles metier sur nom/prenoms/email/mot de passe et unicite email.) Tj
+T*
+(   Parametres: User editingUser) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(17. Signature: private boolean demanderValidationCode\(String expectedCode\)) Tj
+T*
+(   Role: Implante la logique de 'demander validation code' selon le contexte de la classe UserController.) Tj
+T*
+(Page 8/20) Tj
+ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 21 0 R >>
+endobj
+21 0 obj
+<< /Length 3057 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Parametres: String expectedCode) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(18. Signature: private String generateVerificationCode\(\)) Tj
+T*
+(   Role: Gere la logique metier de 'generate verification code' avec les operations suivantes: generation pseudo-aleatoire.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: code pseudo-aleatoire non cryptographique.) Tj
+T*
+() Tj
+T*
+(19. Signature: private void clearFields\(\)) Tj
+T*
+(   Role: Implante la logique de 'clear fields' selon le contexte de la classe UserController.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(20. Signature: private void showInfo\(String message\)) Tj
+T*
+(   Role: Gere la logique metier de 'show info' avec les operations suivantes: feedback utilisateur.) Tj
+T*
+(   Parametres: String message) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(21. Signature: private void showError\(String message\)) Tj
+T*
+(   Role: Gere la logique metier de 'show error' avec les operations suivantes: feedback utilisateur.) Tj
+T*
+(   Parametres: String message) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.dao.UserDao) Tj
+T*
+(Fichier: src/main/java/com/guser/dao/UserDao.java) Tj
+T*
+(Responsabilite: Couche d'acces aux donnees utilisateurs \(CRUD, auth, verifications, evolution) Tj
+T*
+(automatique du schema\).) Tj
+T*
+(Dependances principales: com.guser.config.DatabaseConnection, com.guser.model.User,) Tj
+T*
+(java.sql.Connection, java.sql.DatabaseMetaData, java.sql.PreparedStatement, java.sql.ResultSet,) Tj
+T*
+(java.sql.SQLException, java.sql.Statement) Tj
+T*
+(Nombre de methodes/constructeurs: 20) Tj
+T*
+() Tj
+T*
+(1. Signature: public UserDao\(\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public List<User> findAll\(\) throws SQLException) Tj
+T*
+(   Role: Retourne tous les utilisateurs tries du plus recent au plus ancien.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: List<User>.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(3. Signature: public Optional<User> authenticate\(String email, String motDePasse\) throws) Tj
+T*
+(SQLException) Tj
+T*
+(Page 9/20) Tj
+ET
+endstream
+endobj
+22 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 23 0 R >>
+endobj
+23 0 obj
+<< /Length 3159 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Role: Verifie le couple email/mot_de_passe et retourne eventuellement l'utilisateur.) Tj
+T*
+(   Parametres: String email, String motDePasse) Tj
+T*
+(   Retour: Retourne: Optional<User>.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(4. Signature: public void insert\(User user\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'insert' avec les operations suivantes: ecriture SQL.) Tj
+T*
+(   Parametres: User user) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(5. Signature: public void update\(User user\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'update' avec les operations suivantes: ecriture SQL.) Tj
+T*
+(   Parametres: User user) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(6. Signature: public void delete\(int userId\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'delete' avec les operations suivantes: ecriture SQL.) Tj
+T*
+(   Parametres: int userId) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(7. Signature: public boolean existsByEmail\(String email\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'exists by email' avec les operations suivantes: lecture SQL.) Tj
+T*
+(   Parametres: String email) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(8. Signature: public boolean existsByEmailExceptId\(String email, int userId\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'exists by email except id' avec les operations suivantes: lecture SQL.) Tj
+T*
+(   Parametres: String email, int userId) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(9. Signature: public Optional<User> findByEmail\(String email\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'find by email' avec les operations suivantes: lecture SQL, retour optionnel.) Tj
+T*
+(   Parametres: String email) Tj
+T*
+(   Retour: Retourne: Optional<User>.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(10. Signature: public void updatePassword\(int userId, String newPassword\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'update password' avec les operations suivantes: ecriture SQL.) Tj
+T*
+(   Parametres: int userId, String newPassword) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(11. Signature: public List<User> findAdminsWithFaceTemplate\(\) throws SQLException) Tj
+T*
+(   Role: Retourne les comptes ADMIN qui possedent deja un template FaceID exploitable.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: List<User>.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+(Page 10/20) Tj
+ET
+endstream
+endobj
+24 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 25 0 R >>
+endobj
+25 0 obj
+<< /Length 3344 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+() Tj
+T*
+(12. Signature: public void updateFaceTemplate\(int userId, String faceTemplate\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'update face template' avec les operations suivantes: ecriture SQL.) Tj
+T*
+(   Parametres: int userId, String faceTemplate) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(13. Signature: public void clearFaceTemplate\(int userId\) throws SQLException) Tj
+T*
+(   Role: Implante la logique de 'clear face template' selon le contexte de la classe UserDao.) Tj
+T*
+(   Parametres: int userId) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(14. Signature: public int countAll\(\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'count all' avec les operations suivantes: lecture SQL.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: int.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(15. Signature: private void ensureInitialized\(\) throws SQLException) Tj
+T*
+(   Role: Implante la logique de 'ensure initialized' selon le contexte de la classe UserDao.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(16. Signature: private void ensureSchema\(\) throws SQLException) Tj
+T*
+(   Role: Cree/ajuste automatiquement la table utilisateurs pour maintenir la compatibilite du schema.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(17. Signature: private boolean hasColumn\(DatabaseMetaData metaData, String columnName\) throws) Tj
+T*
+(SQLException) Tj
+T*
+(   Role: Implante la logique de 'has column' selon le contexte de la classe UserDao.) Tj
+T*
+(   Parametres: DatabaseMetaData metaData, String columnName) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(18. Signature: private User mapUser\(ResultSet resultSet\) throws SQLException) Tj
+T*
+(   Role: Implante la logique de 'map user' selon le contexte de la classe UserDao.) Tj
+T*
+(   Parametres: ResultSet resultSet) Tj
+T*
+(   Retour: Retourne: User.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(19. Signature: private java.time.LocalDateTime toLocalDateTime\(Timestamp timestamp\)) Tj
+T*
+(   Role: Implante la logique de 'to local date time' selon le contexte de la classe UserDao.) Tj
+T*
+(   Parametres: Timestamp timestamp) Tj
+T*
+(   Retour: Retourne: java.time.LocalDateTime.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(20. Signature: private int countWithQuery\(String sql\) throws SQLException) Tj
+T*
+(   Role: Gere la logique metier de 'count with query' avec les operations suivantes: lecture SQL.) Tj
+T*
+(Page 11/20) Tj
+ET
+endstream
+endobj
+26 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 27 0 R >>
+endobj
+27 0 obj
+<< /Length 3265 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Parametres: String sql) Tj
+T*
+(   Retour: Retourne: int.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.MainApp) Tj
+T*
+(Fichier: src/main/java/com/guser/MainApp.java) Tj
+T*
+(Responsabilite: Point d'entree JavaFX. Charge la vue de connexion, applique le style global et) Tj
+T*
+(gere un mode de secours si le chargement echoue.) Tj
+T*
+(Dependances principales: javafx.application.Application, javafx.fxml.FXMLLoader,) Tj
+T*
+(javafx.scene.Scene, javafx.scene.control.Alert, javafx.scene.control.TextArea,) Tj
+T*
+(javafx.scene.layout.VBox, javafx.stage.Stage) Tj
+T*
+(Nombre de methodes/constructeurs: 3) Tj
+T*
+() Tj
+T*
+(1. Signature: public void start\(Stage stage\)) Tj
+T*
+(   Role: Initialise la fenetre principale, charge login-view.fxml et applique app.css; bascule sur une vue d'erreur si un probleme survient.) Tj
+T*
+(   Parametres: Stage stage) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: bloque l'UI pendant l'attente utilisateur.) Tj
+T*
+() Tj
+T*
+(2. Signature: private String buildErrorMessage\(Exception exception\)) Tj
+T*
+(   Role: Construit une chaine d'erreur lisible en parcourant la chaine des causes de l'exception.) Tj
+T*
+(   Parametres: Exception exception) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(3. Signature: public static void main\(String[] args\)) Tj
+T*
+(   Role: Lance le cycle de vie JavaFX via Application.launch.) Tj
+T*
+(   Parametres: String[] args) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.model.User) Tj
+T*
+(Fichier: src/main/java/com/guser/model/User.java) Tj
+T*
+(Responsabilite: Modele metier utilisateur \(etat, constructeurs, getters/setters et helpers\).) Tj
+T*
+(Dependances principales: java.time.LocalDateTime) Tj
+T*
+(Nombre de methodes/constructeurs: 25) Tj
+T*
+() Tj
+T*
+(1. Signature: public User\(\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public User\(int id, String nom, String prenoms, String email, String telephone,) Tj
+T*
+(String motDePasse, String role, LocalDateTime dateCreation\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: int id, String nom, String prenoms, String email, String telephone, String motDePasse, String role, LocalDateTime dateCreation) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(Page 12/20) Tj
+ET
+endstream
+endobj
+28 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 29 0 R >>
+endobj
+29 0 obj
+<< /Length 3427 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(3. Signature: public User\(int id, String nom, String prenoms, String email, String telephone,) Tj
+T*
+(String motDePasse, String role, LocalDateTime dateCreation, String faceTemplate\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: int id, String nom, String prenoms, String email, String telephone, String motDePasse, String role, LocalDateTime dateCreation, String faceTemplate) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(4. Signature: public User\(String nom, String prenoms, String email, String telephone, String) Tj
+T*
+(motDePasse, String role\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: String nom, String prenoms, String email, String telephone, String motDePasse, String role) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(5. Signature: public User\(String nom, String prenoms, String email, String telephone, String) Tj
+T*
+(motDePasse, String role, String faceTemplate\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: String nom, String prenoms, String email, String telephone, String motDePasse, String role, String faceTemplate) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(6. Signature: public int getId\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'id' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: int.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(7. Signature: public void setId\(int id\)) Tj
+T*
+(   Role: Met a jour l'attribut 'id' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: int id) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(8. Signature: public String getNom\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'nom' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(9. Signature: public void setNom\(String nom\)) Tj
+T*
+(   Role: Met a jour l'attribut 'nom' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: String nom) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(10. Signature: public String getPrenoms\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'prenoms' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(11. Signature: public void setPrenoms\(String prenoms\)) Tj
+T*
+(Page 13/20) Tj
+ET
+endstream
+endobj
+30 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 31 0 R >>
+endobj
+31 0 obj
+<< /Length 3018 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Role: Met a jour l'attribut 'prenoms' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: String prenoms) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(12. Signature: public String getEmail\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'email' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(13. Signature: public void setEmail\(String email\)) Tj
+T*
+(   Role: Met a jour l'attribut 'email' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: String email) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(14. Signature: public String getTelephone\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'telephone' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(15. Signature: public void setTelephone\(String telephone\)) Tj
+T*
+(   Role: Met a jour l'attribut 'telephone' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: String telephone) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(16. Signature: public String getMotDePasse\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'mot de passe' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(17. Signature: public void setMotDePasse\(String motDePasse\)) Tj
+T*
+(   Role: Met a jour l'attribut 'mot de passe' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: String motDePasse) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(18. Signature: public String getRole\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'role' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(19. Signature: public void setRole\(String role\)) Tj
+T*
+(   Role: Met a jour l'attribut 'role' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: String role) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+(Page 14/20) Tj
+ET
+endstream
+endobj
+32 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 33 0 R >>
+endobj
+33 0 obj
+<< /Length 3082 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+() Tj
+T*
+(20. Signature: public LocalDateTime getDateCreation\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'date creation' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: LocalDateTime.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(21. Signature: public void setDateCreation\(LocalDateTime dateCreation\)) Tj
+T*
+(   Role: Met a jour l'attribut 'date creation' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: LocalDateTime dateCreation) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(22. Signature: public String getFaceTemplate\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'face template' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(23. Signature: public void setFaceTemplate\(String faceTemplate\)) Tj
+T*
+(   Role: Met a jour l'attribut 'face template' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: String faceTemplate) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(24. Signature: public boolean hasFaceTemplate\(\)) Tj
+T*
+(   Role: Effectue une verification booleenne sur l'etat de l'objet.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: boolean.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(25. Signature: public String getNomComplet\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'nom complet' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.service.CaptchaApiService) Tj
+T*
+(Fichier: src/main/java/com/guser/service/CaptchaApiService.java) Tj
+T*
+(Responsabilite: Genere un code captcha et tente de recuperer son image depuis un service HTTP) Tj
+T*
+(externe.) Tj
+T*
+(Dependances principales: javafx.scene.image.Image, java.io.InputStream, java.net.URI,) Tj
+T*
+(java.net.URLEncoder, java.nio.charset.StandardCharsets, java.util.Random) Tj
+T*
+(Nombre de methodes/constructeurs: 3) Tj
+T*
+() Tj
+T*
+(1. Signature: public CaptchaChallenge generateChallenge\(\)) Tj
+T*
+(   Role: Implante la logique de 'generate challenge' selon le contexte de la classe CaptchaApiService.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: CaptchaChallenge.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(Page 15/20) Tj
+ET
+endstream
+endobj
+34 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 35 0 R >>
+endobj
+35 0 obj
+<< /Length 3616 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(2. Signature: private String generateCode\(\)) Tj
+T*
+(   Role: Gere la logique metier de 'generate code' avec les operations suivantes: generation pseudo-aleatoire.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(3. Signature: private Image loadCaptchaImage\(String code\)) Tj
+T*
+(   Role: Implante la logique de 'load captcha image' selon le contexte de la classe CaptchaApiService.) Tj
+T*
+(   Parametres: String code) Tj
+T*
+(   Retour: Retourne: Image.) Tj
+T*
+(   Risques/contraintes: depend d'un service HTTP externe.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.service.EmailService) Tj
+T*
+(Fichier: src/main/java/com/guser/service/EmailService.java) Tj
+T*
+(Responsabilite: Construit et envoie des emails HTML brandes \(verification, reset, 2FA, alerte de) Tj
+T*
+(securite + piece jointe\).) Tj
+T*
+(Dependances principales: com.guser.config.MailConfig, com.guser.dao.UserDao, com.guser.model.User,) Tj
+T*
+( jakarta.activation.DataHandler, jakarta.mail.Authenticator, jakarta.mail.Message,) Tj
+T*
+(jakarta.mail.MessagingException, jakarta.mail.PasswordAuthentication) Tj
+T*
+(Nombre de methodes/constructeurs: 14) Tj
+T*
+() Tj
+T*
+(1. Signature: public void sendVerificationCode\(String recipient, String fullName, String code\)) Tj
+T*
+(throws MessagingException) Tj
+T*
+(   Role: Implante la logique de 'send verification code' selon le contexte de la classe EmailService.) Tj
+T*
+(   Parametres: String recipient, String fullName, String code) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public void sendPasswordResetCode\(String recipient, String fullName, String code\)) Tj
+T*
+(throws MessagingException) Tj
+T*
+(   Role: Implante la logique de 'send password reset code' selon le contexte de la classe EmailService.) Tj
+T*
+(   Parametres: String recipient, String fullName, String code) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(3. Signature: public void sendTwoFactorCode\(String recipient, String fullName, String code,) Tj
+T*
+(LocalDateTime expiresAt\) throws MessagingException) Tj
+T*
+(   Role: Implante la logique de 'send two factor code' selon le contexte de la classe EmailService.) Tj
+T*
+(   Parametres: String recipient, String fullName, String code, LocalDateTime expiresAt) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(4. Signature: public void sendSuspiciousLoginCapture\(String recipient, String fullName, File) Tj
+T*
+(imageFile\) throws MessagingException, IOException) Tj
+T*
+(   Role: Gere la logique metier de 'send suspicious login capture' avec les operations suivantes: interaction camera, feedback utilisateur.) Tj
+T*
+(   Parametres: String recipient, String fullName, File imageFile) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(5. Signature: private Session createSession\(\)) Tj
+T*
+(   Role: Implante la logique de 'create session' selon le contexte de la classe EmailService.) Tj
+T*
+(Page 16/20) Tj
+ET
+endstream
+endobj
+36 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 37 0 R >>
+endobj
+37 0 obj
+<< /Length 3576 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: Session.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(6. Signature: private void sendBrandedEmail\( String recipient, String fallbackName, String) Tj
+T*
+(subject, String title, String intro, String codeLabel, String codeValue, String footerText, File) Tj
+T*
+(attachment, String attachmentFileName \) throws MessagingException) Tj
+T*
+(   Role: Assemble un email HTML complet \(logo inline, contenu, eventuelle piece jointe\) puis l'envoie via SMTP.) Tj
+T*
+(   Parametres: String recipient, String fallbackName, String subject, String title, String intro, String codeLabel, String codeValue, String footerText, File attachment, String attachmentFileName) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: peut echouer si SMTP est mal configure.) Tj
+T*
+() Tj
+T*
+(7. Signature: private MimeBodyPart createInlineLogoPart\(byte[] logoBytes\) throws) Tj
+T*
+(MessagingException) Tj
+T*
+(   Role: Gere la logique metier de 'create inline logo part' avec les operations suivantes: envoi d'email.) Tj
+T*
+(   Parametres: byte[] logoBytes) Tj
+T*
+(   Retour: Retourne: MimeBodyPart.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(8. Signature: private byte[] loadLogoBytes\(\)) Tj
+T*
+(   Role: Implante la logique de 'load logo bytes' selon le contexte de la classe EmailService.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: byte[].) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(9. Signature: private byte[] loadResourceBytes\(String resourcePath\)) Tj
+T*
+(   Role: Implante la logique de 'load resource bytes' selon le contexte de la classe EmailService.) Tj
+T*
+(   Parametres: String resourcePath) Tj
+T*
+(   Retour: Retourne: byte[].) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(10. Signature: private String resolveRecipientName\(String recipient, String fallbackName\)) Tj
+T*
+(   Role: Determine un nom destinataire via base de donnees, fallback fourni, ou derive de l'email.) Tj
+T*
+(   Parametres: String recipient, String fallbackName) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: depend de la disponibilite MySQL.) Tj
+T*
+() Tj
+T*
+(11. Signature: private String capitalize\(String input\)) Tj
+T*
+(   Role: Implante la logique de 'capitalize' selon le contexte de la classe EmailService.) Tj
+T*
+(   Parametres: String input) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(12. Signature: private String buildEmailHtml\( String recipientName, String title, String intro,) Tj
+T*
+(String codeLabel, String codeValue, String footerText, boolean includeLogo \)) Tj
+T*
+(   Role: Implante la logique de 'build email html' selon le contexte de la classe EmailService.) Tj
+T*
+(   Parametres: String recipientName, String title, String intro, String codeLabel, String codeValue, String footerText, boolean includeLogo) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(13. Signature: private String escapeHtml\(String text\)) Tj
+T*
+(   Role: Implante la logique de 'escape html' selon le contexte de la classe EmailService.) Tj
+T*
+(Page 17/20) Tj
+ET
+endstream
+endobj
+38 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 39 0 R >>
+endobj
+39 0 obj
+<< /Length 3307 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Parametres: String text) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(14. Signature: private Properties buildProperties\(\)) Tj
+T*
+(   Role: Gere la logique metier de 'build properties' avec les operations suivantes: envoi d'email.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: Properties.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.service.FaceIdService) Tj
+T*
+(Fichier: src/main/java/com/guser/service/FaceIdService.java) Tj
+T*
+(Responsabilite: Capture webcam et calcule un template biometrie \(LBP\), puis compare des templates) Tj
+T*
+(par similarite cosinus.) Tj
+T*
+(Dependances principales: com.github.sarxos.webcam.Webcam, java.awt.Graphics2D,) Tj
+T*
+(java.awt.RenderingHints, java.awt.image.BufferedImage, java.awt.image.Raster, java.io.IOException,) Tj
+T*
+( java.nio.ByteBuffer, java.util.Base64) Tj
+T*
+(Nombre de methodes/constructeurs: 9) Tj
+T*
+() Tj
+T*
+(1. Signature: public String captureTemplate\(\) throws IOException) Tj
+T*
+(   Role: Pipeline biometrie complet: capture webcam, recadrage, grayscale, histogramme LBP et encodage Base64.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public double compareTemplates\(String liveTemplate, String enrolledTemplate\)) Tj
+T*
+(   Role: Calcule une similarite cosinus entre deux templates FaceID pour produire un score [0..1].) Tj
+T*
+(   Parametres: String liveTemplate, String enrolledTemplate) Tj
+T*
+(   Retour: Retourne: double.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(3. Signature: public double getMatchThreshold\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'match threshold' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: double.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(4. Signature: private BufferedImage captureFromCamera\(\) throws IOException) Tj
+T*
+(   Role: Gere la logique metier de 'capture from camera' avec les operations suivantes: interaction camera.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: BufferedImage.) Tj
+T*
+(   Risques/contraintes: necessite une camera accessible.) Tj
+T*
+() Tj
+T*
+(5. Signature: private BufferedImage cropCenterSquare\(BufferedImage image\)) Tj
+T*
+(   Role: Implante la logique de 'crop center square' selon le contexte de la classe FaceIdService.) Tj
+T*
+(   Parametres: BufferedImage image) Tj
+T*
+(   Retour: Retourne: BufferedImage.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(6. Signature: private BufferedImage toGrayscale\(BufferedImage image, int width, int height\)) Tj
+T*
+(   Role: Implante la logique de 'to grayscale' selon le contexte de la classe FaceIdService.) Tj
+T*
+(Page 18/20) Tj
+ET
+endstream
+endobj
+40 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 41 0 R >>
+endobj
+41 0 obj
+<< /Length 3245 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Parametres: BufferedImage image, int width, int height) Tj
+T*
+(   Retour: Retourne: BufferedImage.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(7. Signature: private float[] buildLbpHistogram\(BufferedImage image\)) Tj
+T*
+(   Role: Implante la logique de 'build lbp histogram' selon le contexte de la classe FaceIdService.) Tj
+T*
+(   Parametres: BufferedImage image) Tj
+T*
+(   Retour: Retourne: float[].) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(8. Signature: private String encodeHistogram\(float[] histogram\)) Tj
+T*
+(   Role: Gere la logique metier de 'encode histogram' avec les operations suivantes: encodage/decodage binaire.) Tj
+T*
+(   Parametres: float[] histogram) Tj
+T*
+(   Retour: Retourne: String.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(9. Signature: private float[] decodeHistogram\(String encodedHistogram\)) Tj
+T*
+(   Role: Gere la logique metier de 'decode histogram' avec les operations suivantes: encodage/decodage binaire.) Tj
+T*
+(   Parametres: String encodedHistogram) Tj
+T*
+(   Retour: Retourne: float[].) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.util.SceneManager) Tj
+T*
+(Fichier: src/main/java/com/guser/util/SceneManager.java) Tj
+T*
+(Responsabilite: Utilitaire de navigation JavaFX pour changer de vue/FXML et reappliquer la feuille) Tj
+T*
+( CSS.) Tj
+T*
+(Dependances principales: com.guser.MainApp, javafx.fxml.FXMLLoader, javafx.scene.Node,) Tj
+T*
+(javafx.scene.Parent, javafx.scene.Scene, javafx.stage.Stage, java.io.IOException) Tj
+T*
+(Nombre de methodes/constructeurs: 2) Tj
+T*
+() Tj
+T*
+(1. Signature: private SceneManager\(\)) Tj
+T*
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public static void switchScene\(Node node, String fxmlPath, String title\)) Tj
+T*
+(   Role: Implante la logique de 'switch scene' selon le contexte de la classe SceneManager.) Tj
+T*
+(   Parametres: Node node, String fxmlPath, String title) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(Classe: com.guser.util.SessionManager) Tj
+T*
+(Fichier: src/main/java/com/guser/util/SessionManager.java) Tj
+T*
+(Responsabilite: Stockage en memoire de l'utilisateur connecte pour la session applicative) Tj
+T*
+(courante.) Tj
+T*
+(Dependances principales: com.guser.model.User) Tj
+T*
+(Nombre de methodes/constructeurs: 4) Tj
+T*
+() Tj
+T*
+(1. Signature: private SessionManager\(\)) Tj
+T*
+(Page 19/20) Tj
+ET
+endstream
+endobj
+42 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 43 0 R >>
+endobj
+43 0 obj
+<< /Length 2056 >>
+stream
+BT
+/F1 10 Tf
+14 TL
+40 805 Td
+(   Role: Construit l'objet et positionne les attributs initiaux necessaires a son fonctionnement.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Constructeur \(initialise une instance\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(2. Signature: public static void setCurrentUser\(User user\)) Tj
+T*
+(   Role: Met a jour l'attribut 'current user' avec la valeur fournie en parametre.) Tj
+T*
+(   Parametres: User user) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(3. Signature: public static User getCurrentUser\(\)) Tj
+T*
+(   Role: Expose la valeur courante de 'current user' sans modifier l'etat interne.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Retourne: User.) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(4. Signature: public static void clear\(\)) Tj
+T*
+(   Role: Implante la logique de 'clear' selon le contexte de la classe SessionManager.) Tj
+T*
+(   Parametres: Aucun parametre.) Tj
+T*
+(   Retour: Aucune valeur retour \(effet de bord\).) Tj
+T*
+(   Risques/contraintes: Risque faible; methode locale sans dependance externe critique.) Tj
+T*
+() Tj
+T*
+(===============================================================================================) Tj
+T*
+(6. OBSERVATIONS TECHNIQUES IMPORTANTES) Tj
+T*
+(- Les mots de passe utilisateurs sont compares/stockes en clair dans la logique actuelle \(pas de) Tj
+T*
+(hachage\).) Tj
+T*
+(- Les identifiants SMTP et JDBC sont codes en dur dans les classes de configuration.) Tj
+T*
+(- FaceID est une implementation locale LBP/cosinus: utile pour prototype, a durcir pour) Tj
+T*
+(production.) Tj
+T*
+(- UserDao applique une migration automatique de schema au demarrage \(avantage: resiliente; risque:) Tj
+T*
+( operation non tracee\).) Tj
+T*
+() Tj
+T*
+(FIN DU DOCUMENT) Tj
+T*
+(Page 20/20) Tj
+ET
+endstream
+endobj
+xref
+0 44
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000255 00000 n 
+0000000325 00000 n 
+0000000451 00000 n 
+0000002462 00000 n 
+0000002588 00000 n 
+0000005726 00000 n 
+0000005852 00000 n 
+0000008905 00000 n 
+0000009033 00000 n 
+0000012410 00000 n 
+0000012538 00000 n 
+0000015810 00000 n 
+0000015938 00000 n 
+0000019402 00000 n 
+0000019530 00000 n 
+0000022796 00000 n 
+0000022924 00000 n 
+0000026027 00000 n 
+0000026155 00000 n 
+0000029265 00000 n 
+0000029393 00000 n 
+0000032605 00000 n 
+0000032733 00000 n 
+0000036130 00000 n 
+0000036258 00000 n 
+0000039576 00000 n 
+0000039704 00000 n 
+0000043184 00000 n 
+0000043312 00000 n 
+0000046383 00000 n 
+0000046511 00000 n 
+0000049646 00000 n 
+0000049774 00000 n 
+0000053443 00000 n 
+0000053571 00000 n 
+0000057200 00000 n 
+0000057328 00000 n 
+0000060688 00000 n 
+0000060816 00000 n 
+0000064114 00000 n 
+0000064242 00000 n 
+trailer
+<< /Size 44 /Root 1 0 R >>
+startxref
+66351
+%%EOF
